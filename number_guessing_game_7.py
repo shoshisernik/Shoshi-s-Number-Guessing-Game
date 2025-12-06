@@ -2,8 +2,15 @@
 #The player will be able to choode the file destination.
 
 import random
+import os
+
 DEBUG = True 
 Move_mode = True
+
+# Add your export path here, between the "_":
+#A new file will be created at this location containing the secret number when the player types 'e'.
+# Example:  r"C:\Users\YourName\Documents\exported_number.txt"
+EXPORT_PATH = r"PASTE_YOUR_PATH_HERE.txt"
 
 def main():
     global DEBUG
@@ -44,6 +51,17 @@ def main():
             if user_input.lower() == 'n': #if the player wants to start a new game, they should type 'n'.
                 secret_number = random.randint(1,50)
                 print("Starting a new game!")
+                continue
+            if user_input.lower() == 'e': #if the player wants to export the secret number, they should type 'e'.
+                if EXPORT_PATH == "PASTE_YOUR_PATH_HERE.txt":
+                    print("Please set a valid EXPORT_PATH in the code to use this feature.")
+                else:
+                    try:
+                        with open(EXPORT_PATH, 'w') as file:
+                            file.write(f"The secret number is: {secret_number}\n")
+                        print(f"Secret number exported successfully to {EXPORT_PATH}")
+                    except Exception as e:
+                        print(f"Failed to export the secret number. Error: {e}")
                 continue
 
             try: # Otherwise, put in an integer between 1 and 50 to guess.
