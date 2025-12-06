@@ -10,7 +10,7 @@ Move_mode = True
 # Add your export path here, between the "_":
 #A new file will be created at this location containing the secret number when the player types 'e'.
 # Example:  r"C:\Users\YourName\Documents\exported_number.txt"
-EXPORT_PATH = r"PASTE_YOUR_PATH_HERE.txt"
+EXPORT_PATH = r"C:\python_course\Number_guessing_game\exported_number.txt"
 
 def main():
     global DEBUG
@@ -26,7 +26,7 @@ def main():
             if Move_mode:
                 print("Moving mode is enabled. The secret number will change +/- 2 after each guess.")
 
-            user_input = input("Take a guess (or 'x' to quit and end gameplay, 's' to reveal secret number and end gameplay, 'm' to turn on Move Mode, or 'n' to generate a new number within your current game. A new game will start after you guess correctly, until you end gameplay.):")
+            user_input = input("Take a guess (or 'x' to quit and end gameplay, 's' to reveal secret number and end gameplay, 'm' to turn on Move Mode, 'n' to generate a new number within your current game, or 'e' to export the secret number. A new game will start after you guess correctly, until you end gameplay.):")
         
             if user_input.lower() == 'x':   #if the player wants to quit, they should type 'x'.
                 print("game over")
@@ -53,14 +53,11 @@ def main():
                 print("Starting a new game!")
                 continue
             if user_input.lower() == 'e': #if the player wants to export the secret number, they should type 'e'.
-                if EXPORT_PATH == "PASTE_YOUR_PATH_HERE.txt":
-                    print("Please set a valid EXPORT_PATH in the code to use this feature.")
-                else:
-                    try:
-                        with open(EXPORT_PATH, 'w') as file:
-                            file.write(f"The secret number is: {secret_number}\n")
-                        print(f"Secret number exported successfully to {EXPORT_PATH}")
-                    except Exception as e:
+                try:
+                    with open(EXPORT_PATH, 'w') as file:
+                        file.write(f"The secret number is: {secret_number}\n")
+                    print(f"Secret number exported successfully to {EXPORT_PATH}")
+                except Exception as e:
                         print(f"Failed to export the secret number. Error: {e}")
                 continue
 
